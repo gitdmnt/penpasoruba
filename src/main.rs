@@ -1,53 +1,16 @@
-use core::fmt;
-
+mod puzzle_type;
 mod solvers;
-
-#[derive(Debug)]
-enum PuzzleType {
-    SimpleLoop,
-}
-#[derive(Debug)]
-pub struct Puzzle {
-    name: PuzzleType,
-    height: usize,
-    width: usize,
-    board: Vec<Vec<i32>>,
-    is_finished: bool,
-    is_cleared: bool,
-}
-
-impl fmt::Display for Puzzle {
-    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
-        for i in 0..self.height {
-            for j in 0..self.width {
-                match self.board[i][j] {
-                    0 => {
-                        write!(f, " ").unwrap();
-                    }
-                    1 => {
-                        write!(f, "x").unwrap();
-                    }
-                    _ => {
-                        write!(f, "{}", self.board[i][j]).unwrap();
-                    }
-                }
-            }
-            write!(f, "\n").unwrap();
-        }
-        write!(f, "")
-    }
-}
 
 fn main() {
     //パズル指定
-    let name = PuzzleType::SimpleLoop;
+    let name = puzzle_type::PuzzleType::SimpleLoop;
 
     //盤面作成/入力
     let height: usize = 10;
     let width: usize = 10;
 
     //構造体のインスタンスを作成
-    let puzzle = Puzzle {
+    let puzzle = puzzle_type::Puzzle {
         name,
         height: height,
         width: width,
@@ -60,20 +23,20 @@ fn main() {
     play(puzzle);
 }
 
-fn play(mut puzzle: Puzzle) {
+fn play(mut puzzle: puzzle_type::Puzzle) {
     while !puzzle.is_finished {
         showBoard(&puzzle);
         puzzle = solve(puzzle);
     }
 }
 
-fn showBoard(puzzle: &Puzzle) {
+fn showBoard(puzzle: &puzzle_type::Puzzle) {
     println!("{:}", puzzle);
 }
 
-fn solve(mut puzzle: Puzzle) -> Puzzle {
+fn solve(mut puzzle: puzzle_type::Puzzle) -> puzzle_type::Puzzle {
     match puzzle.name {
-        PuzzleType::SimpleLoop => puzzle = solvers::simple_loop_solver(puzzle),
+        puzzle_type::PuzzleType::SimpleLoop => puzzle = solvers::simple_loop_solver(puzzle),
         _ => println!("何のゲームやるよ??"),
     }
     return puzzle;
