@@ -52,7 +52,7 @@ fn showBoard(puzzle: &Puzzle) {
 fn solve(mut puzzle: Puzzle) -> Puzzle {
     match puzzle.name {
         PuzzleType::SimpleLoop => puzzle = solvers::simple_loop_solver(puzzle),
-        _ => println!("何のゲームやるよ"),
+        _ => println!("何のゲームやるよ??"),
     }
     return puzzle;
 }
