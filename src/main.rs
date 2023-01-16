@@ -1,3 +1,5 @@
+use core::fmt;
+
 mod solvers;
 
 #[derive(Debug)]
@@ -12,6 +14,28 @@ pub struct Puzzle {
     board: Vec<Vec<i32>>,
     is_finished: bool,
     is_cleared: bool,
+}
+
+impl fmt::Display for Puzzle {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        for i in 0..self.height {
+            for j in 0..self.width {
+                match self.board[i][j] {
+                    0 => {
+                        write!(f, " ").unwrap();
+                    }
+                    1 => {
+                        write!(f, "x").unwrap();
+                    }
+                    _ => {
+                        write!(f, "{}", self.board[i][j]).unwrap();
+                    }
+                }
+            }
+            write!(f, "\n").unwrap();
+        }
+        write!(f, "")
+    }
 }
 
 fn main() {
@@ -44,9 +68,7 @@ fn play(mut puzzle: Puzzle) {
 }
 
 fn showBoard(puzzle: &Puzzle) {
-    for i in 0..puzzle.height {
-        println!("{:?}", puzzle.board[i]);
-    }
+    println!("{:}", puzzle);
 }
 
 fn solve(mut puzzle: Puzzle) -> Puzzle {
