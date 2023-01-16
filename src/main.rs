@@ -25,19 +25,18 @@ fn main() {
 
 fn play(mut puzzle: puzzle_type::Puzzle) {
     while !puzzle.is_finished {
-        showBoard(&puzzle);
+        show_board(&puzzle);
         puzzle = solve(puzzle);
     }
 }
 
-fn showBoard(puzzle: &puzzle_type::Puzzle) {
+fn show_board(puzzle: &puzzle_type::Puzzle) {
     println!("{:}", puzzle);
 }
 
 fn solve(mut puzzle: puzzle_type::Puzzle) -> puzzle_type::Puzzle {
     match puzzle.name {
         puzzle_type::PuzzleType::SimpleLoop => puzzle = solvers::simple_loop_solver(puzzle),
-        _ => println!("何のゲームやるよ??"),
     }
     return puzzle;
 }
