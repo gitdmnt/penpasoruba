@@ -19,10 +19,11 @@ fn main() {
 }
 
 fn play(mut puzzle: puzzle_type::Puzzle) {
-    while !puzzle.is_finished() == true {
+    while !puzzle.is_finished() {
         show_board(&puzzle);
         puzzle = solve(puzzle);
     }
+    show_board(&puzzle);
 }
 
 fn show_board(puzzle: &puzzle_type::Puzzle) {

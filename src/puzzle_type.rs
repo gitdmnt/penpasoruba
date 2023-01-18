@@ -11,7 +11,7 @@ pub enum PuzzleType {
 pub struct Puzzle {
     name: PuzzleType,
     width: usize,
-    pub height: usize,
+    height: usize,
     board: Vec<Vec<i32>>,
     is_cleared: bool,
 }
@@ -58,22 +58,53 @@ impl Puzzle {
 //盤面をいい感じに表示すべきだと思う
 impl fmt::Display for Puzzle {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
-        for i in 0..self.height {
-            for j in 0..self.width {
-                match self.board[i][j] {
-                    0 => {
-                        write!(f, " ").unwrap();
-                    }
-                    1 => {
-                        write!(f, "x").unwrap();
-                    }
-                    _ => {
-                        write!(f, "{}", self.board[i][j]).unwrap();
-                    }
+        let mut s = String::new();
+        for y in 0..2 * self.height + 1 {
+            for x in 0..2 * self.width + 1 {
+                match (x % 2, y % 2) {
+                    (1, 1) => s += self.fmt_face(x, y),
+                    (0, 1) => s += self.fmt_edge(x, y, false),
+                    (1, 0) => s += self.fmt_edge(x, y, true),
+                    (0, 0) => s += self.fmt_vertex(x, y),
+                    _ => (),
                 }
             }
-            write!(f, "\n").unwrap();
+            s += "\n";
         }
-        write!(f, "")
+        write!(f, "{}", s)
+    }
+}
+
+impl Puzzle {
+    fn fmt_face(&self, x: usize, y: usize) -> &str {
+        match self.board[y][x] {
+            0 => " ",
+            1 => "x",
+            _ => ".",
+        }
+    }
+    fn fmt_edge(&self, x: usize, y: usize, is_vertical: bool) -> &str {
+        const BLOCKED: &str = "x";
+        const ERROR: &str = ".";
+        if is_vertical {
+            match self.board[y][x] {
+                0 => "─",
+                1 => BLOCKED,
+                _ => ERROR,
+            }
+        } else {
+            match self.board[y][x] {
+                0 => "│",
+                1 => BLOCKED,
+                _ => ERROR,
+            }
+        }
+    }
+    fn fmt_vertex(&self, x: usize, y: usize) -> &str {
+        match self.board[y][x] {
+            0 => "┼",
+            1 => "x",
+            _ => ".",
+        }
     }
 }
