@@ -75,6 +75,7 @@ impl fmt::Display for Puzzle {
     }
 }
 
+//盤面表示関連
 impl Puzzle {
     fn fmt_face(&self, x: usize, y: usize) -> &str {
         match self.board[y][x] {
