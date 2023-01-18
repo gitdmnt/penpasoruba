@@ -6,7 +6,7 @@ pub enum PuzzleType {
     SimpleLoop,
 }
 
-//この辺全部pubにしてるのなんかキモくない？　なんかキモいと思う　アクセッサ的なやつでどうにかすればいいのかな
+//型定義
 #[derive(Debug)]
 pub struct Puzzle {
     name: PuzzleType,
