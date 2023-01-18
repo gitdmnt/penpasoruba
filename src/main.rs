@@ -3,7 +3,7 @@ use penpasoruba::solvers;
 
 fn main() {
     //パズル指定
-    let name = puzzle_types::PuzzleType::SimpleLoop;
+    let name = puzzle_types::PuzzleName::SimpleLoop;
 
     //盤面作成/入力
     let width: usize = 10;
@@ -33,7 +33,7 @@ fn show_board(puzzle: &puzzle_types::Puzzle) {
 //これ(パズルの種類によるソルバーの振り分け)もっと簡単に書きたいけど、どっかで結局パターンマッチしなきゃいけないんだろうな　とりあえずここでやる
 fn solve(mut puzzle: puzzle_types::Puzzle) -> puzzle_types::Puzzle {
     match puzzle.get_name() {
-        puzzle_types::PuzzleType::SimpleLoop => {
+        puzzle_types::PuzzleName::SimpleLoop => {
             puzzle = solvers::simple_loop::simple_loop_solver(puzzle)
         }
     }

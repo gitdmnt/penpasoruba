@@ -2,14 +2,14 @@ use core::fmt;
 
 //順次追加
 #[derive(Debug)]
-pub enum PuzzleType {
+pub enum PuzzleName {
     SimpleLoop,
 }
 
 //型定義
 #[derive(Debug)]
 pub struct Puzzle {
-    name: PuzzleType,
+    name: PuzzleName,
     width: usize,
     height: usize,
     board: Vec<Vec<i32>>,
@@ -19,7 +19,7 @@ pub struct Puzzle {
 // コンストラクタとアクセッサ
 impl Puzzle {
     //コンストラクタ
-    pub fn new(name: PuzzleType, width: usize, height: usize) -> Puzzle {
+    pub fn new(name: PuzzleName, width: usize, height: usize) -> Puzzle {
         Puzzle {
             name,
             width,
@@ -29,7 +29,7 @@ impl Puzzle {
         }
     }
     //アクセッサ
-    pub fn get_name(&self) -> &PuzzleType {
+    pub fn get_name(&self) -> &PuzzleName {
         &self.name
     }
 
