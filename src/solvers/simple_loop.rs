@@ -14,7 +14,9 @@ pub fn simple_loop_solver(mut puzzle: Puzzle) -> Puzzle {
 //壁を全部ふさぐ関数
 fn wall_fusaguer(mut puzzle: Puzzle) -> Puzzle {
     //単純に壁があるところ
-
+    for y in 0..puzzle.get_height() {
+        for x in 0..puzzle.get_width() {}
+    }
     //ふさぐと小ループになってしまうところ
     puzzle
 }

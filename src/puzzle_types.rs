@@ -33,16 +33,16 @@ impl Puzzle {
         &self.name
     }
 
-    pub fn get_width(&self) -> &usize {
-        &self.width
+    pub fn get_width(&self) -> usize {
+        self.width
     }
 
-    pub fn get_height(&self) -> &usize {
-        &self.height
+    pub fn get_height(&self) -> usize {
+        self.height
     }
 
-    pub fn is_cleared(&self) -> &bool {
-        &self.is_cleared
+    pub fn is_cleared(&self) -> bool {
+        self.is_cleared
     }
 }
 
