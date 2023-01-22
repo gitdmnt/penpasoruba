@@ -1,5 +1,7 @@
-use penpasoruba::puzzle_types;
-use penpasoruba::solvers;
+mod puzzle_types;
+mod solvers;
+
+use solvers::modules;
 
 fn main() {
     //パズル指定
